@@ -1,4 +1,4 @@
-package fr.fms.controller;
+package fr.fms.web;
 
 import fr.fms.business.IBusiness;
 import fr.fms.entities.Hotel;
