@@ -1,5 +1,12 @@
 package fr.fms;
 
+import fr.fms.dao.CityRepository;
+import fr.fms.dao.HotelRepository;
+import fr.fms.dao.UserRepository;
+import fr.fms.entities.City;
+import fr.fms.entities.Hotel;
+import fr.fms.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,12 +18,72 @@ public class SuperHotelApplication implements CommandLineRunner {
 		SpringApplication.run(SuperHotelApplication.class, args);
 	}
 
+	@Autowired
+	private HotelRepository hotelRepository;
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private CityRepository cityRepository;
+
 	@Override
 	public void run(String... args) throws Exception {
 		dataHotel();
 	}
 
 	private void dataHotel() {
-		System.out.println("tout va bien");
+		// Créer des utilisateurs (managers)
+		User manager1 = new User();
+		manager1.setFirstName("Manager");
+		manager1.setLastName("One");
+		manager1.setPassword("password123");
+		manager1.setEmail("manager1@example.com");
+		manager1.setRole(User.Role.MANAGER);
+		userRepository.save(manager1);
+
+		User manager2 = new User();
+		manager2.setFirstName("Manager");
+		manager2.setLastName("Two");
+		manager2.setPassword("password123");
+		manager2.setEmail("manager2@example.com");
+		manager2.setRole(User.Role.MANAGER);
+		userRepository.save(manager2);
+
+		// Créer des villes
+		City city1 = new City();
+		city1.setName("Toulouse");
+		City city2 = new City();
+		city2.setName("Lyon");
+		cityRepository.save(city1);
+		cityRepository.save(city2);
+
+		// Créer des hôtels sans spécifier l'ID (car il sera généré par la base de données)
+		Hotel hotel1 = new Hotel();
+		hotel1.setName("Hotel Paris");
+		hotel1.setAddress("1 rue de Paris");
+		hotel1.setPhone("01 23 45 67 89");
+		hotel1.setStars(5);
+		hotel1.setPricePerNight(150.0);
+		hotel1.setAvailableRooms(20);
+		hotel1.setCity(city1);
+		hotel1.setManager(manager1);
+		hotel1.setImageUrl("https://www.sowell.fr/wp-content/uploads/2021/02/57-chambre-1270x700px.webp");
+		hotelRepository.save(hotel1);
+
+		Hotel hotel2 = new Hotel();
+		hotel2.setName("Hotel Lyon");
+		hotel2.setAddress("12 rue de Lyon");
+		hotel2.setPhone("04 56 78 90 12");
+		hotel2.setStars(4);
+		hotel2.setPricePerNight(120.0);
+		hotel2.setAvailableRooms(15);
+		hotel2.setCity(city2);
+		hotel2.setManager(manager2);
+		hotel2.setImageUrl("https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg");
+		hotelRepository.save(hotel2);
+
+		// Afficher un message pour confirmer que les données ont été ajoutées
+		System.out.println("Données d'hôtels ajoutées avec succès!");
 	}
 }

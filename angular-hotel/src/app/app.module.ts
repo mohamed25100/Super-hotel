@@ -5,10 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HotelsComponent } from './components/hotels/hotels.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HotelsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
