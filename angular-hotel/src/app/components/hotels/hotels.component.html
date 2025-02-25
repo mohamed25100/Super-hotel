@@ -8,12 +8,15 @@
 
 <main>
     <section class="rooms">
-        <div class="room-card">
+        <div class="room-card" *ngFor="let hotel of listHotels">
             <a href="">
-                <img src="https://www.sowell.fr/wp-content/uploads/2021/02/57-chambre-1270x700px.webp" alt="Chambre Standard">
+                <img *ngIf="hotel.imageUrl" src="{{ hotel.imageUrl }}" alt="{{ hotel.name }}">
+                <img *ngIf="!hotel.imageUrl" src="http://localhost:8080/images/none.png" alt="{{ hotel.name }}">
             </a>
-            <h2>Chambre Standard</h2>
-            <p>Confortable et abordable.</p>
+            <h2>{{ hotel.name }}</h2>
+            <p>{{ hotel.address }}</p>
+            <p>{{ hotel.stars }} ⭐</p>
+            <p>{{ hotel.pricePerNight }} €</p>
         </div>
         <div class="room-card">
             <a href="">
@@ -54,5 +57,5 @@
 </main>
 
 <footer>
-    <p>&copy; 2024 Hôtel de Rêve</p>
+    <p>&copy; 2025 Hôtel de Rêve</p>
 </footer>
