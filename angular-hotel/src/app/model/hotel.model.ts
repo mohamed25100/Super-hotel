@@ -1,3 +1,5 @@
+import { City } from "./city.model";
+
 export class Hotel {
     id: number;
     name: string;
@@ -6,7 +8,7 @@ export class Hotel {
     stars: number;
     pricePerNight: number;
     availableRooms: number;
-    city: any;  // Remplacez `any` par `City` si vous avez une interface City
+    city: City;
     manager: any;  // Remplacez `any` par `User` si vous avez une interface User
     imageUrl: string;
 
