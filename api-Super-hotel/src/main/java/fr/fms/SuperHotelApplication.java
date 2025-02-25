@@ -2,9 +2,11 @@ package fr.fms;
 
 import fr.fms.dao.CityRepository;
 import fr.fms.dao.HotelRepository;
+import fr.fms.dao.RoomRepository;
 import fr.fms.dao.UserRepository;
 import fr.fms.entities.City;
 import fr.fms.entities.Hotel;
+import fr.fms.entities.Room;
 import fr.fms.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -26,6 +28,9 @@ public class SuperHotelApplication implements CommandLineRunner {
 
 	@Autowired
 	private CityRepository cityRepository;
+
+	@Autowired
+	private RoomRepository roomRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -52,7 +57,7 @@ public class SuperHotelApplication implements CommandLineRunner {
 
 		// Créer des villes
 		City city1 = new City();
-		city1.setName("Toulouse");
+		city1.setName("Paris");
 		City city2 = new City();
 		city2.setName("Lyon");
 		cityRepository.save(city1);
@@ -81,7 +86,44 @@ public class SuperHotelApplication implements CommandLineRunner {
 		hotel2.setImageUrl("https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg");
 		hotelRepository.save(hotel2);
 
+		// Créer des chambres pour chaque hôtel
+		Room room1 = new Room();
+		room1.setRoomNumber("101");
+		room1.setType("Double");
+		room1.setCapacity(2);
+		room1.setPricePerNight(150.0);
+		room1.setIsAvailable(true);
+		room1.setHotel(hotel1);
+		roomRepository.save(room1);
+
+		Room room2 = new Room();
+		room2.setRoomNumber("102");
+		room2.setType("Single");
+		room2.setCapacity(1);
+		room2.setPricePerNight(100.0);
+		room2.setIsAvailable(true);
+		room2.setHotel(hotel1);
+		roomRepository.save(room2);
+
+		Room room3 = new Room();
+		room3.setRoomNumber("201");
+		room3.setType("Suite");
+		room3.setCapacity(4);
+		room3.setPricePerNight(250.0);
+		room3.setIsAvailable(false); // Chambre non disponible
+		room3.setHotel(hotel2);
+		roomRepository.save(room3);
+
+		Room room4 = new Room();
+		room4.setRoomNumber("202");
+		room4.setType("Double");
+		room4.setCapacity(2);
+		room4.setPricePerNight(120.0);
+		room4.setIsAvailable(true);
+		room4.setHotel(hotel2);
+		roomRepository.save(room4);
+
 		// Afficher un message pour confirmer que les données ont été ajoutées
-		System.out.println("Données d'hôtels ajoutées avec succès!");
+		System.out.println("Données d'hôtels et chambres ajoutées avec succès!");
 	}
 }
