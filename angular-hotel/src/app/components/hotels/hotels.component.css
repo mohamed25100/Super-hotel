@@ -63,3 +63,38 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+/* cities */
+.city {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+.city-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.city-button {
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.city-button:hover {
+    background-color: #2980b9;
+}
+
+.city-button:active {
+    background-color: #1f618d;
+}

@@ -7,6 +7,12 @@
 </header>
 
 <main>
+    <div class="city">
+        <div *ngFor="let city of listCities" class="city-buttons">
+            <button class="city-button">{{ city.name }}</button>
+        </div>
+        <button class="city-button">Toutes les villes</button>
+    </div>
     <section class="rooms">
         <div class="room-card" *ngFor="let hotel of listHotels">
             <a href="">

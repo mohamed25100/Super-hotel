@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { City } from 'src/app/model/city.model';
 import { Hotel } from 'src/app/model/hotel.model';
 import { HotelService } from 'src/app/services/hotel.service';
 @Component({
@@ -8,6 +9,7 @@ import { HotelService } from 'src/app/services/hotel.service';
 })
 export class HotelsComponent implements OnInit{
   listHotels: Hotel[] | undefined;
+  listCities: City[] | undefined;
   error = null;
 
   constructor(private hotelService : HotelService) {
@@ -16,17 +18,23 @@ export class HotelsComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllHotels();
+    this.getAllCities();
   }
 
   getAllHotels() {
     this.hotelService.getHotels().subscribe({
-      next: (data) => {
-        console.log("Hotels data:", data);
-        this.listHotels = data;
-      },
+      next: (data) => (this.listHotels = data),
       error: (err) => (this.error = err.message),
       complete: () => (this.error = null),
     })
+  }
+
+  getAllCities() {
+    this.hotelService.getCities().subscribe({
+      next: (data) => this.listCities = data,
+      error: (err) => this.error = err.message,
+      complete: () => this.error = null
+    });
   }
 
 }
