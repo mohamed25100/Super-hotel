@@ -8,6 +8,10 @@ ng new angular-hotel
 
 ng add @angular/material
 
+ng g c components/hotels
+
+ng g s services/hotel
+
 # Spring 
 
 ## Dependencies
