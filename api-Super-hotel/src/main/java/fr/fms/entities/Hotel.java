@@ -39,9 +39,6 @@ public class Hotel implements Serializable {
     @Column(name = "price_per_night")
     private Double pricePerNight; // Prix par nuit
 
-    @Column(name = "available_rooms")
-    private Integer availableRooms; // Nombre de chambres disponibles
-
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city; // Ville à laquelle cet hôtel appartient

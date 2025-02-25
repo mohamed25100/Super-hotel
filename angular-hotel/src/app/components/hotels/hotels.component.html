@@ -15,7 +15,7 @@
     </div>
     <section class="rooms">
         <div class="room-card" *ngFor="let hotel of filteredHotels">
-            <a href="">
+            <a href="#" [routerLink]="['/hotel', hotel.id]">
                 <img *ngIf="hotel.imageUrl" src="{{ hotel.imageUrl }}" alt="{{ hotel.name }}">
                 <img *ngIf="!hotel.imageUrl" src="http://localhost:8080/images/none.png" alt="{{ hotel.name }}">
             </a>

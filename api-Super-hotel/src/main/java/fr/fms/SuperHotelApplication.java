@@ -65,7 +65,6 @@ public class SuperHotelApplication implements CommandLineRunner {
 		hotel1.setPhone("01 23 45 67 89");
 		hotel1.setStars(5);
 		hotel1.setPricePerNight(150.0);
-		hotel1.setAvailableRooms(20);
 		hotel1.setCity(city1);
 		hotel1.setManager(manager1);
 		hotel1.setImageUrl("https://www.sowell.fr/wp-content/uploads/2021/02/57-chambre-1270x700px.webp");
@@ -77,7 +76,6 @@ public class SuperHotelApplication implements CommandLineRunner {
 		hotel2.setPhone("04 56 78 90 12");
 		hotel2.setStars(4);
 		hotel2.setPricePerNight(120.0);
-		hotel2.setAvailableRooms(15);
 		hotel2.setCity(city2);
 		hotel2.setManager(manager2);
 		hotel2.setImageUrl("https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg");
