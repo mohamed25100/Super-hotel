@@ -8,13 +8,13 @@
 
 <main>
     <div class="city">
-        <div *ngFor="let city of listCities" class="city-buttons">
+        <div *ngFor="let city of listCities" (click)="filterByCity(city.id)" class="city-buttons">
             <button class="city-button">{{ city.name }}</button>
         </div>
-        <button class="city-button">Toutes les villes</button>
+        <button (click)="resetFilter()" class="city-button">Toutes les villes</button>
     </div>
     <section class="rooms">
-        <div class="room-card" *ngFor="let hotel of listHotels">
+        <div class="room-card" *ngFor="let hotel of filteredHotels">
             <a href="">
                 <img *ngIf="hotel.imageUrl" src="{{ hotel.imageUrl }}" alt="{{ hotel.name }}">
                 <img *ngIf="!hotel.imageUrl" src="http://localhost:8080/images/none.png" alt="{{ hotel.name }}">

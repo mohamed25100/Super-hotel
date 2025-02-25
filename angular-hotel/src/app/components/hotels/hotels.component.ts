@@ -10,6 +10,7 @@ import { HotelService } from 'src/app/services/hotel.service';
 export class HotelsComponent implements OnInit{
   listHotels: Hotel[] | undefined;
   listCities: City[] | undefined;
+  filteredHotels: Hotel[] | undefined;
   error = null;
 
   constructor(private hotelService : HotelService) {
@@ -23,7 +24,7 @@ export class HotelsComponent implements OnInit{
 
   getAllHotels() {
     this.hotelService.getHotels().subscribe({
-      next: (data) => (this.listHotels = data),
+      next: (data) => {this.listHotels = data;this.filteredHotels = data;},
       error: (err) => (this.error = err.message),
       complete: () => (this.error = null),
     })
@@ -37,4 +38,24 @@ export class HotelsComponent implements OnInit{
     });
   }
 
+  filterByCity(cityId: number): void {
+    if (this.listCities) {
+      this.hotelService.getHotels().subscribe({
+        next: (data) => {
+          this.filteredHotels = data.filter(
+            (hotel) => hotel.city && hotel.city.id === cityId
+          );;
+          console.log("Filtered Hotels data:", data.filter(
+            (hotel) => hotel.city && hotel.city.id === cityId
+          ));
+        },
+        error: (err) => (this.error = err.message),
+        complete: () => (this.error = null),
+      });
+    }
+  }
+
+  resetFilter(): void {
+    this.filteredHotels = this.listHotels;
+  }
 }
