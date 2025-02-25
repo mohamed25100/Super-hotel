@@ -1,0 +1,25 @@
+<header>
+    <h1>{{ hotel?.name }}</h1>
+</header>
+
+<main>
+    <section class="hotel-details">
+        <div class="hotel-card">
+            <img *ngIf="hotel?.imageUrl" [src]="hotel.imageUrl" alt="{{ hotel.name }}">
+            <img *ngIf="!hotel?.imageUrl" src="http://localhost:8080/images/none.png" alt="{{ hotel.name }}">
+            
+            <h2>{{ hotel?.name }}</h2>
+            <p><strong>Adresse :</strong> {{ hotel?.address }}</p>
+            <p><strong>Téléphone :</strong> {{ hotel?.phone }}</p>
+            <p><strong>Étoiles :</strong> {{ hotel?.stars }} ⭐</p>
+            <p><strong>Chambres disponibles :</strong> {{ hotel?.availableRooms }}</p>
+            <p><strong>Prix par nuit :</strong> {{ hotel?.pricePerNight }} €</p>
+            
+            <button (click)="bookRoom()" class="book-button">Réserver une chambre</button>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Hôtel de Rêve</p>
+</footer>

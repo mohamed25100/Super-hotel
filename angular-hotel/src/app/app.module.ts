@@ -8,12 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HotelsComponent } from './components/hotels/hotels.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HotelDetailsComponent } from './components/hotel-details/hotel-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HotelsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HotelDetailsComponent
   ],
   imports: [
     BrowserModule,

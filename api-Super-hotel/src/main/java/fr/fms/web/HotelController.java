@@ -5,12 +5,10 @@ import fr.fms.entities.City;
 import fr.fms.entities.Hotel;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
@@ -31,5 +29,12 @@ public class HotelController {
     @GetMapping("/cities")
     public List<City> getAllCities() {
         return iBusiness.getCities();  // Appel de la méthode dans IBusinessImpl
+    }
+
+    // Récupérer un hôtel par son ID
+    @GetMapping("/hotel/{id}")
+    public Hotel getHotelById(@PathVariable Long id) {
+        Optional<Hotel> hotel = iBusiness.getHotelById(id);
+        return hotel.orElse(null); // Retourne null si l'hôtel n'existe pas
     }
 }

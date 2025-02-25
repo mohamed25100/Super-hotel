@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class IBusinessImpl implements IBusiness {
@@ -25,5 +26,9 @@ public class IBusinessImpl implements IBusiness {
     @Override
     public List<City> getCities() {
         return cityRepository.findAll();
+    }
+    @Override
+    public Optional<Hotel> getHotelById(Long id) {
+        return hotelRepository.findById(id);
     }
 }
