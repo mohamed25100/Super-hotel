@@ -16,6 +16,8 @@ ng g c components/hotel-details
 
 ng g c components/login
 
+ng g s services/authenticate
+
 # Spring
 
 ## Dependencies
