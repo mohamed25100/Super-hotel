@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICredential } from 'src/app/model/credential';
 import { Role, User } from 'src/app/model/user.model';
+import { AuthenticateService } from 'src/app/services/authenticate.service';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +16,13 @@ export class LoginComponent implements OnInit {
   };
   user: User | undefined;
   errorMessage: string | undefined;
-  ngOnInit(): void {
+
+  constructor(public authService: AuthenticateService,private router: Router) {
 
   }
 
-  onLogin(): void {
-   this.user = new User(
+  ngOnInit(): void {
+    this.user = new User(
       0,              // ID temporaire
       "",         // Prénom
       "",          // Nom
@@ -27,5 +30,17 @@ export class LoginComponent implements OnInit {
       "",
       Role.USER       // Rôle par défaut (USER)
     );
+  }
+
+  onLogin(): void {
+    console.log("Connexion " + this.myForm.email + " " + this.myForm.password);
+  
+    this.authService.login(this.myForm).subscribe(
+      
+    )
+  }
+
+  goToHome(): void {
+    this.router.navigateByUrl('/');
   }
 }
