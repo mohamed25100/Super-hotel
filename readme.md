@@ -12,7 +12,11 @@ ng g c components/hotels
 
 ng g s services/hotel
 
-# Spring 
+ng g c components/hotel-details
+
+ng g c components/login
+
+# Spring
 
 ## Dependencies
 

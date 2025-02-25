@@ -1,0 +1,86 @@
+.login-container {
+    width: 350px;
+    /* Augmentez la largeur pour plus d'espace */
+    margin: 100px auto;
+    padding: 30px;
+    /* Augmentez le padding pour plus d'espace intérieur */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    /* Adoucissez les coins */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Ajoutez une légère ombre */
+    background-color: #f9f9f9;
+    /* Un fond légèrement grisé */
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    /* Augmentez la marge pour plus d'espace */
+    color: #333;
+    font-size: 2em;
+    /* Augmentez la taille de la police */
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    /* Organisez les éléments en colonne */
+}
+
+.form-group {
+    margin-bottom: 20px;
+    /* Augmentez la marge entre les groupes de formulaire */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 600;
+    /* Légèrement en gras */
+}
+
+input[type="email"],
+input[type="password"] {
+    width: calc(100% - 18px);
+    /* Ajustez la largeur pour tenir compte du padding et de la bordure */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+    /* Transition douce pour la bordure */
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+    /* Changez la couleur de la bordure au focus */
+    outline: none;
+    /* Supprimez l'outline par défaut */
+}
+
+button[type="submit"] {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Transition douce pour la couleur de fond */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+    /* Assombrissez la couleur de fond au survol */
+}
+
+.error-message {
+    color: #d9534f;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 500;
+}

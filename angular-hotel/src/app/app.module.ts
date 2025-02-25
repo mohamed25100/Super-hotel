@@ -9,18 +9,22 @@ import { HotelsComponent } from './components/hotels/hotels.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HotelDetailsComponent } from './components/hotel-details/hotel-details.component';
+import { LoginComponent } from './components/login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HotelsComponent,
     NotFoundComponent,
-    HotelDetailsComponent
+    HotelDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
     BrowserAnimationsModule
   ],
   providers: [],

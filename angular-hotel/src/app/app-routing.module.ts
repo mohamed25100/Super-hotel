@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HotelsComponent } from './components/hotels/hotels.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HotelDetailsComponent } from './components/hotel-details/hotel-details.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,9 @@ const routes: Routes = [
   },
   {
     path: 'hotel/:id', component: HotelDetailsComponent // Route pour les détails d'un hôtel
+  },
+  { 
+    path : 'login' , component : LoginComponent
   },
   {
     path: '', redirectTo: 'hotels', pathMatch: 'full'
