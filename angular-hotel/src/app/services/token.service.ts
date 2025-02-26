@@ -55,27 +55,27 @@ export class TokenService {
       email: '',
       role: ''
     };
-
+  
     let token = this.getToken();
-
+  
     if (token) {
       console.log("Token avant décodage:", token);
-
+  
       try {
         if (token.split('.').length !== 3) {
           throw new Error("Token mal formé");
         }
-
+  
         const decoded: any = jwtDecode(token);
         console.log("Token décodé:", decoded);
-
+  
         userConnected.id = decoded.id || 0;
         userConnected.firstName = decoded.firstName || '';
         userConnected.lastName = decoded.lastName || '';
-        userConnected.email = decoded.email || '';
+        userConnected.email = decoded.sub || ''; // ✅ Correction ici
         userConnected.role = this.extractRole(decoded.scope);
         
-      }catch (error) {
+      } catch (error) {
         console.error("Erreur lors du décodage du token :", error);
         this.clearToken();
       }

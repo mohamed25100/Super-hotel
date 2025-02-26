@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/manager-dashboard']);
               break;
             default:
-              this.router.navigate(['/home']);
+              this.router.navigate(['/hotels']);
           }
         } else {
           console.error("Erreur : Impossible de récupérer les infos utilisateur.");

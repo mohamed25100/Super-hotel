@@ -1,5 +1,6 @@
 package fr.fms;
 
+import fr.fms.business.IAccountImpl;
 import fr.fms.dao.CityRepository;
 import fr.fms.dao.HotelRepository;
 import fr.fms.dao.RoomRepository;
@@ -8,6 +9,7 @@ import fr.fms.entities.City;
 import fr.fms.entities.Hotel;
 import fr.fms.entities.Room;
 import fr.fms.entities.User;
+import fr.fms.entities.User.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,9 +24,9 @@ public class SuperHotelApplication implements CommandLineRunner {
 
 	@Autowired
 	private HotelRepository hotelRepository;
-
+/*
 	@Autowired
-	private UserRepository userRepository;
+	private UserRepository userRepository;*/
 
 	@Autowired
 	private CityRepository cityRepository;
@@ -32,13 +34,26 @@ public class SuperHotelApplication implements CommandLineRunner {
 	@Autowired
 	private RoomRepository roomRepository;
 
+	@Autowired
+	private IAccountImpl accountService; // Utilisation de IAccountImpl
+
 	@Override
 	public void run(String... args) throws Exception {
 		dataHotel();
 	}
 
 	private void dataHotel() {
+		// Création des utilisateurs avec IAccountImpl
+		User user = new User(null, "John", "Doe", "user@example.com", "password123", Role.USER, null);
+		User admin = new User(null, "Admin", "Smith", "admin@example.com", "password123", Role.ADMIN, null);
+		User manager = new User(null, "Manager", "One", "manager1@example.com", "password123", Role.MANAGER, null);
+
+		accountService.saveUser(user);
+		accountService.saveUser(admin);
+		accountService.saveUser(manager);
+
 		// Créer des utilisateurs (managers)
+		/*
 		User manager1 = new User();
 		manager1.setFirstName("Manager");
 		manager1.setLastName("One");
@@ -54,7 +69,7 @@ public class SuperHotelApplication implements CommandLineRunner {
 		manager2.setEmail("manager2@example.com");
 		manager2.setRole(User.Role.MANAGER);
 		userRepository.save(manager2);
-
+		*/
 		// Créer des villes
 		City city1 = new City();
 		city1.setName("Paris");
@@ -71,7 +86,7 @@ public class SuperHotelApplication implements CommandLineRunner {
 		hotel1.setStars(5);
 		hotel1.setPricePerNight(150.0);
 		hotel1.setCity(city1);
-		hotel1.setManager(manager1);
+		hotel1.setManager(manager);
 		hotel1.setImageUrl("https://www.sowell.fr/wp-content/uploads/2021/02/57-chambre-1270x700px.webp");
 		hotelRepository.save(hotel1);
 
@@ -82,7 +97,7 @@ public class SuperHotelApplication implements CommandLineRunner {
 		hotel2.setStars(4);
 		hotel2.setPricePerNight(120.0);
 		hotel2.setCity(city2);
-		hotel2.setManager(manager2);
+		hotel2.setManager(manager);
 		hotel2.setImageUrl("https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg");
 		hotelRepository.save(hotel2);
 
