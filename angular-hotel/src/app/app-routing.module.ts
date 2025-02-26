@@ -6,6 +6,7 @@ import { HotelDetailsComponent } from './components/hotel-details/hotel-details.
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ManagerComponent } from './components/manager/manager.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
     path : 'login' , component : LoginComponent
   },
   {
-    path : 'admin' , component : AdminComponent
+    path : 'admin' , component : AdminComponent,
+    canActivate : [AdminGuard]
   },
   {
     path : 'manager-dashboard' , component : ManagerComponent

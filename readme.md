@@ -24,6 +24,14 @@ ng g c components/admin
 
 ng g c components/manager
 
+ng generate guard guards/auth
+
+ng generate guard guards/user
+
+ng generate guard guards/admin
+
+ng generate guard guards/manager
+
 # Spring
 
 ## Dependencies
