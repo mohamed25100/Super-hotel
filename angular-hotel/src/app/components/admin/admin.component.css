@@ -1,0 +1,106 @@
+/* Style pour le header */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header .admin-button {
+    padding: 10px 20px;
+    background-color: #f0c14b;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+header .admin-button:hover {
+    background-color: #e2b33f;
+}
+
+/* Style pour le main */
+main {
+    padding: 20px;
+    padding-bottom: 50px;
+}
+
+/* Style pour les cartes d'hôtels */
+.admin-hotels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.admin-hotel-card {
+    width: 300px;
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-hotel-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.admin-hotel-card h2, .admin-hotel-card p {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Style pour les boutons d'administration */
+.admin-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.admin-buttons .edit-button, .admin-buttons .delete-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-buttons .edit-button {
+    background-color: #3498db;
+    color: white;
+}
+
+.admin-buttons .edit-button:hover {
+    background-color: #2980b9;
+}
+
+.admin-buttons .delete-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.admin-buttons .delete-button:hover {
+    background-color: #c0392b;
+}
+
+/* Style pour le footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

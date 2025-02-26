@@ -31,6 +31,10 @@ export class HotelService {
     console.log("Login service " + credentials.email + " " + credentials.password);
     return this.http.post<IToken>(environment.host + "/login", credentials);
   }
+  // 🔹 Supprimer un hôtel par son ID
+  public deleteHotel(hotelId: number): Observable<void> {
+    return this.http.delete<void>(`${environment.host}/hotels/${hotelId}`);
+  }
 
   // 🔹 Récupérer tous les utilisateurs
   public getUsers(): Observable<User[]> {

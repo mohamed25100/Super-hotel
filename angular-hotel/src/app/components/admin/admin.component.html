@@ -1,1 +1,25 @@
-<p>admin works!</p>
+<header> 
+    <h1>Gestion des Hôtels</h1>
+    <button (click)="openAddHotelModal()" class="admin-button">Ajouter un hôtel</button>
+</header>
+
+<main>
+    <section class="admin-hotels">
+        <div class="admin-hotel-card" *ngFor="let hotel of listHotels">
+            <img *ngIf="hotel.imageUrl" src="{{ hotel.imageUrl }}" alt="{{ hotel.name }}">
+            <img *ngIf="!hotel.imageUrl" src="http://localhost:8080/images/none.png" alt="{{ hotel.name }}">
+            <h2>{{ hotel.name }}</h2>
+            <p>{{ hotel.address }}</p>
+            <p>{{ hotel.stars }} ⭐</p>
+            <p>{{ hotel.pricePerNight }} €</p>
+            <div class="admin-buttons">
+                <button (click)="editHotel(hotel.id)" class="edit-button">Modifier</button>
+                <button (click)="deleteHotel(hotel.id)" class="delete-button">Supprimer</button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Super-Hôtel Admin</p>
+</footer>
