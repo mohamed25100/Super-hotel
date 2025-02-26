@@ -11,16 +11,18 @@ header {
 
 header h1 {
     margin: 0;
+    font-size: 2em; /* Augmenter la taille du titre */
 }
 
 header .admin-button {
-    padding: 10px 20px;
+    padding: 12px 25px; /* Augmenter la taille du bouton */
     background-color: #f0c14b;
     border: none;
     color: #333;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 8px; /* Adoucir les coins */
     transition: background-color 0.3s ease;
+    font-size: 1em; /* Ajuster la taille de la police */
 }
 
 header .admin-button:hover {
@@ -30,7 +32,41 @@ header .admin-button:hover {
 /* Style pour le main */
 main {
     padding: 20px;
-    padding-bottom: 50px;
+    padding-bottom: 70px; /* Augmenter pour éviter que le contenu ne soit coupé par le footer */
+    display: flex;
+    flex-direction: column; /* Organiser en colonne */
+}
+
+/* Style pour la gestion des villes */
+.admin-cities {
+    margin-bottom: 30px; /* Ajouter de l'espace entre les sections */
+}
+
+.admin-cities h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+.city-list {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.city-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.city-item:last-child {
+    border-bottom: none;
+}
+
+.city-item span {
+    font-size: 1.1em;
 }
 
 /* Style pour les cartes d'hôtels */
@@ -40,24 +76,36 @@ main {
     justify-content: space-around;
 }
 
+.admin-hotels h2 {
+    font-size: 1.8em;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .admin-hotel-card {
-    width: 300px;
+    width: 320px; /* Ajuster la largeur */
     margin: 20px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px; /* Adoucir les coins */
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Augmenter l'ombre */
+    transition: transform 0.3s ease; /* Ajouter une transition pour l'effet de survol */
+}
+
+.admin-hotel-card:hover {
+    transform: translateY(-5px); /* Légère élévation au survol */
 }
 
 .admin-hotel-card img {
     width: 100%;
-    height: 200px;
+    height: 220px; /* Ajuster la hauteur */
     object-fit: cover;
     cursor: pointer;
 }
 
 .admin-hotel-card h2, .admin-hotel-card p {
-    padding: 10px;
+    padding: 15px; /* Augmenter le padding */
     text-align: center;
 }
 
@@ -65,15 +113,16 @@ main {
 .admin-buttons {
     display: flex;
     justify-content: space-around;
-    padding: 10px;
+    padding: 15px; /* Augmenter le padding */
 }
 
 .admin-buttons .edit-button, .admin-buttons .delete-button {
-    padding: 10px 20px;
+    padding: 12px 25px; /* Augmenter la taille du bouton */
     border: none;
-    border-radius: 5px;
+    border-radius: 8px; /* Adoucir les coins */
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 1em; /* Ajuster la taille de la police */
 }
 
 .admin-buttons .edit-button {
@@ -99,7 +148,7 @@ footer {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 15px; /* Augmenter le padding */
     position: fixed;
     bottom: 0;
     width: 100%;
