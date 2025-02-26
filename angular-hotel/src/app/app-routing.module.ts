@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ManagerComponent } from './components/manager/manager.component';
 import { AdminGuard } from './guards/admin.guard';
+import { ManagerGuard } from './guards/manager.guard';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
     canActivate : [AdminGuard]
   },
   {
-    path : 'manager-dashboard' , component : ManagerComponent
+    path : 'manager-dashboard' , component : ManagerComponent,
+    canActivate : [ManagerGuard]
   },
   {
     path: '', redirectTo: 'hotels', pathMatch: 'full'
