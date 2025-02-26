@@ -15,6 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminComponent } from './components/admin/admin.component';
 import { ManagerComponent } from './components/manager/manager.component';
+import { AddCityComponent } from './components/admin/add-city/add-city.component';
+import { EditCityComponent } from './components/admin/edit-city/edit-city.component';
+import { AddHotelComponent } from './components/admin/add-hotel/add-hotel.component';
+import { EditHotelComponent } from './components/admin/edit-hotel/edit-hotel.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { ManagerComponent } from './components/manager/manager.component';
     HotelDetailsComponent,
     LoginComponent,
     AdminComponent,
-    ManagerComponent
+    ManagerComponent,
+    AddCityComponent,
+    EditCityComponent,
+    AddHotelComponent,
+    EditHotelComponent
   ],
   imports: [
     BrowserModule,
