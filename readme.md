@@ -32,6 +32,14 @@ ng generate guard guards/admin
 
 ng generate guard guards/manager
 
+ng g c components/admin/add-city
+
+ng g c components/admin/edit-city
+
+ng g c components/admin/add-hotel
+
+ng g c components/admin/edit-hotel
+
 # Spring
 
 ## Dependencies
