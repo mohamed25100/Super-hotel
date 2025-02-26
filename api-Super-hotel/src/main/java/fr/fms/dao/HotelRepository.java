@@ -14,4 +14,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
     List<Hotel> findByNameContainingIgnoreCase(String name); // Recherche d'hôtels par nom (insensible à la casse)
 
+    boolean existsById(Long id); // Vérifie si un hôtel existe par son ID
+
+    void deleteById(Long id); // Supprime un hôtel par son ID
 }

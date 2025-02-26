@@ -102,6 +102,8 @@ public class SuperHotelApplication implements CommandLineRunner {
 		hotelRepository.save(hotel2);
 
 		// Créer des chambres pour chaque hôtel
+
+		/*
 		Room room1 = new Room();
 		room1.setRoomNumber("101");
 		room1.setType("Double");
@@ -119,6 +121,8 @@ public class SuperHotelApplication implements CommandLineRunner {
 		room2.setIsAvailable(true);
 		room2.setHotel(hotel1);
 		roomRepository.save(room2);
+
+		 */
 
 		Room room3 = new Room();
 		room3.setRoomNumber("201");

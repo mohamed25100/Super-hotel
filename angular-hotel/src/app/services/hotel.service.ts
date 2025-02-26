@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Hotel } from '../model/hotel.model';
 import { environment } from 'src/environments/environment';
@@ -33,7 +33,13 @@ export class HotelService {
   }
   // 🔹 Supprimer un hôtel par son ID
   public deleteHotel(hotelId: number): Observable<void> {
-    return this.http.delete<void>(`${environment.host}/hotels/${hotelId}`);
+    const token = localStorage.getItem('token'); // Récupération du token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json' // Assure-toi que le format est bien JSON
+    });
+  
+    return this.http.delete<void>(`${environment.host}/hotel/${hotelId}`, { headers });
   }
 
   // 🔹 Récupérer tous les utilisateurs

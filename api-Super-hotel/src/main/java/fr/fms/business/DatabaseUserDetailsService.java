@@ -32,6 +32,10 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 
         logger.info("✅ Utilisateur authentifié : {} avec rôle: {}", user.getEmail(), user.getRole());
 
-        return new UserPrincipal(user);
+        UserDetails userDetails = new UserPrincipal(user);
+        logger.info("🔍 Rôles attribués à l'utilisateur : {}", userDetails.getAuthorities()); // Ajout du log
+
+        return userDetails;
     }
+
 }

@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +23,11 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
@@ -35,6 +40,9 @@ import java.nio.file.Paths;
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+
+    private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
+
     @Autowired
     private DatabaseUserDetailsService userDetailsService;
 
@@ -51,18 +59,15 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults()) // Gestion des CORS
                 .authorizeHttpRequests(ahr -> {
                     ahr.requestMatchers(HttpMethod.POST, "/api/login").permitAll(); // Authentification ouverte
-                    ahr.requestMatchers(HttpMethod.GET, "/api/**").permitAll(); // Autoriser accès public aux ressources
+                    ahr.requestMatchers(HttpMethod.GET, "/api/**").permitAll(); // GET ouvert
+                    ahr.requestMatchers(HttpMethod.DELETE, "/api/hotel/**").permitAll(); // Autoriser la suppression sans restrictions
+                    /*
+                    ahr.requestMatchers(HttpMethod.DELETE, "/api/hotel/**").hasAuthority("ROLE_ADMIN"); // DELETE réservé aux admins
+                    */
                     ahr.anyRequest().authenticated(); // Toutes les autres requêtes nécessitent un token valide
                 })
-                .oauth2ResourceServer(ors -> ors.jwt(Customizer.withDefaults())) // Gestion des JWT
+                .oauth2ResourceServer(ors -> ors.jwt(jwt -> jwt.jwtAuthenticationConverter(authenticationConverter()))) // Gestion des JWT
                 .build();
-    }
-
-    @Bean
-    public JwtEncoder jwtEncoder() throws IOException, URISyntaxException {
-        Path path = Paths.get(getClass().getClassLoader().getResource("jwt-secret.txt").toURI());
-        String secretKey = Files.readString(path);
-        return new NimbusJwtEncoder(new ImmutableSecret<>(secretKey.getBytes()));
     }
 
     @Bean
@@ -79,5 +84,35 @@ public class SecurityConfig {
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return new ProviderManager(authProvider);
+    }
+
+    private JwtAuthenticationConverter authenticationConverter() {
+        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+
+        // Convertir le champ 'scope' en autorités (rôles)
+        JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        authoritiesConverter.setAuthorityPrefix("ROLE_");  // Préfixe 'ROLE_' pour les rôles
+        authoritiesConverter.setAuthoritiesClaimName("scope");  // Le champ 'scope' dans le token contient les rôles
+
+        converter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
+        return converter;
+    }
+
+    @Bean
+    public JwtEncoder jwtEncoder() throws IOException, URISyntaxException {
+        Path path = Paths.get(getClass().getClassLoader().getResource("jwt-secret.txt").toURI());
+        String secretKey = Files.readString(path);
+        return new NimbusJwtEncoder(new ImmutableSecret<>(secretKey.getBytes()));
+    }
+
+    // Nouvelle méthode pour authentifier l'utilisateur et loguer ses rôles
+    private Authentication authenticateAndLog(Authentication authentication) {
+        // Authentifie l'utilisateur
+        Authentication authenticated = authenticationManager(userDetailsService).authenticate(authentication);
+
+        // Logge les rôles de l'utilisateur
+        log.info("User roles from JWT: {}", authenticated.getAuthorities());
+
+        return authenticated;
     }
 }
