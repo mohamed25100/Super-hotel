@@ -44,4 +44,15 @@ public class IBusinessImpl implements IBusiness {
             log.warn("Tentative de suppression d'un hôtel inexistant (ID: {})", id);
         }
     }
+
+    @Override
+    public void deleteCity(Long id) {
+        if (cityRepository.existsById(id)) {
+            cityRepository.deleteById(id);
+            log.info("Ville avec l'ID {} supprimée avec succès", id);
+        } else {
+            log.warn("Tentative de suppression d'une ville inexistante (ID: {})", id);
+            throw new RuntimeException("Ville introuvable");
+        }
+    }
 }

@@ -55,4 +55,18 @@ public class HotelController {
             throw new RuntimeException("Erreur lors de la suppression de l'hôtel", e);
         }
     }
+
+    // 🔹 Supprimer une ville par son ID
+    @DeleteMapping("/city/{id}")
+    public void deleteCity(@PathVariable Long id) {
+        try {
+            log.info("Suppression de la ville avec l'ID : {}", id);
+            iBusiness.deleteCity(id);
+        } catch (Exception e) {
+            log.error("Erreur lors de la suppression de la ville avec l'ID : {}", id, e);
+            throw new RuntimeException("Erreur lors de la suppression de la ville", e);
+        }
+    }
+
+
 }

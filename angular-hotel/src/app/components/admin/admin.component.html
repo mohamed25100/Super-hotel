@@ -1,10 +1,27 @@
 <header> 
-    <h1>Gestion des Hôtels</h1>
+    <h1>Gestion des Hôtels & Villes</h1>
     <button (click)="openAddHotelModal()" class="admin-button">Ajouter un hôtel</button>
+    <button (click)="openAddCityModal()" class="admin-button">Ajouter une ville</button>
 </header>
 
 <main>
+    <!-- 🔹 Gestion des villes -->
+    <section class="admin-cities">
+        <h2>Gestion des Villes</h2>
+        <div class="city-list">
+            <div *ngFor="let city of listCities" class="city-item">
+                <span>{{ city.name }}</span>
+                <div class="admin-buttons">
+                    <button (click)="openEditCityModal(city.id)" class="edit-button">Modifier</button>
+                    <button (click)="deleteCity(city.id)" class="delete-button">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🔹 Gestion des hôtels -->
     <section class="admin-hotels">
+        <h2>Liste des Hôtels</h2>
         <div class="admin-hotel-card" *ngFor="let hotel of listHotels">
             <img *ngIf="hotel.imageUrl" src="{{ hotel.imageUrl }}" alt="{{ hotel.name }}">
             <img *ngIf="!hotel.imageUrl" src="http://localhost:8080/images/none.png" alt="{{ hotel.name }}">

@@ -38,9 +38,21 @@ export class HotelService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json' // Assure-toi que le format est bien JSON
     });
-  
+
     return this.http.delete<void>(`${environment.host}/hotel/${hotelId}`, { headers });
   }
+
+  // 🔹 Supprimer une ville par son ID
+  public deleteCity(cityId: number): Observable<void> {
+    const token = localStorage.getItem('token'); // Récupération du token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json' // Assure que le format est bien JSON
+    });
+
+    return this.http.delete<void>(`${environment.host}/city/${cityId}`, { headers });
+  }
+
 
   // 🔹 Récupérer tous les utilisateurs
   public getUsers(): Observable<User[]> {

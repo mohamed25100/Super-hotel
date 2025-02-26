@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { City } from 'src/app/model/city.model';
 import { Hotel } from 'src/app/model/hotel.model';
 import { HotelService } from 'src/app/services/hotel.service';
 
@@ -10,12 +11,14 @@ import { HotelService } from 'src/app/services/hotel.service';
 })
 export class AdminComponent implements OnInit {
   listHotels: Hotel[] = [];
+  listCities: City[] = [];
   error = null;
 
   constructor(private hotelService: HotelService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllHotels();
+    this.getAllCities();
   }
 
   getAllHotels() {
@@ -26,12 +29,20 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  getAllCities() {
+    this.hotelService.getCities().subscribe({
+      next: (data) => this.listCities = data,
+      error: (err) => this.error = err.message,
+      complete: () => (this.error = null),
+    });
+  }
+
   openAddHotelModal() {
-    this.router.navigate(['/admin/add-hotel']); // Redirige vers le formulaire d'ajout
+    this.router.navigate(['/admin/add-hotel']);
   }
 
   editHotel(hotelId: number) {
-    this.router.navigate(['/admin/edit-hotel', hotelId]); // Redirige vers le formulaire de modification
+    this.router.navigate(['/admin/edit-hotel', hotelId]);
   }
 
   deleteHotel(hotelId: number) {
@@ -40,6 +51,29 @@ export class AdminComponent implements OnInit {
         next: () => {
           this.listHotels = this.listHotels.filter(h => h.id !== hotelId);
           alert("Hôtel supprimé avec succès !");
+        },
+        error: (err) => alert("Erreur lors de la suppression : " + err.message),
+      });
+    }
+  }
+
+  // 🔹 Redirection pour ajouter une ville
+  openAddCityModal() { 
+    this.router.navigate(['/admin/add-city']); 
+  }
+
+  // 🔹 Redirection pour modifier une ville
+  openEditCityModal(cityId: number) {
+    this.router.navigate(['/admin/edit-city', cityId]);
+  }
+
+  // 🔹 Supprimer une ville
+  deleteCity(cityId: number) {
+    if (confirm("Voulez-vous vraiment supprimer cette ville ?")) {
+      this.hotelService.deleteCity(cityId).subscribe({
+        next: () => {
+          this.listCities = this.listCities.filter(c => c.id !== cityId);
+          alert("Ville supprimée avec succès !");
         },
         error: (err) => alert("Erreur lors de la suppression : " + err.message),
       });
