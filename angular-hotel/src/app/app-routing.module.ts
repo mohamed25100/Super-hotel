@@ -4,6 +4,8 @@ import { HotelsComponent } from './components/hotels/hotels.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HotelDetailsComponent } from './components/hotel-details/hotel-details.component';
 import { LoginComponent } from './components/login/login.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { ManagerComponent } from './components/manager/manager.component';
 
 const routes: Routes = [
   {
@@ -14,6 +16,12 @@ const routes: Routes = [
   },
   { 
     path : 'login' , component : LoginComponent
+  },
+  {
+    path : 'admin' , component : AdminComponent
+  },
+  {
+    path : 'manager-dashboard' , component : ManagerComponent
   },
   {
     path: '', redirectTo: 'hotels', pathMatch: 'full'

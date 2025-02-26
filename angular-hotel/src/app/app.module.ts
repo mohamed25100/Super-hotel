@@ -13,6 +13,8 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { AdminComponent } from './components/admin/admin.component';
+import { ManagerComponent } from './components/manager/manager.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { MatIconModule } from '@angular/material/icon';
     HotelsComponent,
     NotFoundComponent,
     HotelDetailsComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent,
+    ManagerComponent
   ],
   imports: [
     BrowserModule,

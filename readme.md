@@ -20,6 +20,10 @@ ng g s services/authenticate
 
 ng g s services/token
 
+ng g c components/admin
+
+ng g c components/manager
+
 # Spring
 
 ## Dependencies
