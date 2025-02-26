@@ -24,10 +24,11 @@ export class TokenService {
   }
 
     /**
-   * Supprime le token et redirige vers la page d'accueil.
+   * Supprime le token et user et redirige vers la page d'accueil.
    */
   clearToken() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.router.navigate(['/']);
   }
 
