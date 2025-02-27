@@ -96,6 +96,10 @@ public class SuperHotelApplication implements CommandLineRunner {
 		businessService.addCity(city2);
 		businessService.addCity(city3);
 
+		// Mise à jour de la ville Marseille (city3)
+		city3.setName("Nice");
+		businessService.updateCity(city3); // Mise à jour de la ville avec le nouveau nom
+
 		// Créer des hôtels sans spécifier l'ID (car il sera généré par la base de données)
 		Hotel hotel1 = new Hotel();
 		hotel1.setName("Hotel Paris");

@@ -15,4 +15,7 @@ public interface IBusiness {
     void deleteHotel(Long id); // Supprimer un hôtel par son ID
     void deleteCity(Long id); // Supprimer une ville par son ID
     City addCity(City city);  // Ajouter une ville
+    Optional<City> getCityById(Long id); // Récupérer une ville par son ID
+    City updateCity(City city); // Mettre à jour une ville
+
 }

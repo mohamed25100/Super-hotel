@@ -11,6 +11,16 @@ export class CityService {
 
   constructor(private http: HttpClient) { }
 
+  // 🔹 Récupérer une ville par son ID
+  public getCityById(cityId: number): Observable<City> {
+    return this.http.get<City>(`${environment.host}/city/${cityId}`);
+  }
+
+  // 🔹 Mettre à jour une ville
+  public updateCity(city: City): Observable<City> {
+    return this.http.put<City>(`${environment.host}/city/${city.id}`, city);
+  }
+
   // 🔹 Supprimer une ville par son ID
   public deleteCity(cityId: number): Observable<void> {
     return this.http.delete<void>(`${environment.host}/city/${cityId}`);

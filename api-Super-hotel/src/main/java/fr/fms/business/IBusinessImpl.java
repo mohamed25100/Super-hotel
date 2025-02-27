@@ -76,5 +76,28 @@ public class IBusinessImpl implements IBusiness {
         }
     }
 
+    @Override
+    public Optional<City> getCityById(Long id) {
+        return cityRepository.findById(id);
+    }
+
+    @Override
+    public City updateCity(City city) {
+        if (city == null || city.getId() == null || city.getId() <= 0) {
+            log.error("Tentative de mise à jour avec un ID invalide : {}", (city != null ? city.getId() : "null"));
+            throw new IllegalArgumentException("L'ID de la ville doit être valide et supérieur à 0");
+        }
+
+        Optional<City> existingCity = cityRepository.findById(city.getId());
+        if (existingCity.isPresent()) {
+            City updatedCity = cityRepository.save(city);
+            log.info("Ville mise à jour avec succès : {}", updatedCity.getName());
+            return updatedCity;
+        } else {
+            log.warn("Tentative de mise à jour d'une ville inexistante (ID: {})", city.getId());
+            throw new RuntimeException("Ville introuvable avec l'ID : " + city.getId());
+        }
+    }
+
 
 }

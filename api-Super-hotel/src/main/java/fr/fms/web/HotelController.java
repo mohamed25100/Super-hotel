@@ -88,5 +88,38 @@ public class HotelController {
         }
     }
 
+    // ** Récupérer une ville par son ID **
+    @GetMapping("/city/{id}")
+    public ResponseEntity<City> getCityById(@PathVariable Long id) {
+        Optional<City> city = iBusiness.getCityById(id);  // Recherche de la ville par son ID
+        if (city.isPresent()) {
+            return ResponseEntity.ok(city.get());  // Retourne la ville trouvée avec un code 200
+        } else {
+            return ResponseEntity.notFound().build();  // Retourne un code 404 si la ville n'est pas trouvée
+        }
+    }
+
+    // 🔹 Mettre à jour une ville
+    @PutMapping("/city/{id}")
+    public ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City city) {
+        log.info("Mise à jour de la ville avec l'ID : {}", id);
+
+        if (city == null || city.getName() == null || city.getName().isEmpty()) {
+            log.error("Erreur : les données de la ville sont invalides");
+            return ResponseEntity.badRequest().build();
+        }
+
+        try {
+            city.setId(id); // S'assurer que l'ID correspond à celui dans l'URL
+            City updatedCity = iBusiness.updateCity(city);
+            return ResponseEntity.ok(updatedCity);
+        } catch (RuntimeException e) {
+            log.warn("Ville avec l'ID {} introuvable", id);
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
 
 }

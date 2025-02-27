@@ -1,1 +1,18 @@
-<p>edit-city works!</p>
+<div class="container">
+    <h2>Modifier la Ville</h2>
+
+    <form (ngSubmit)="updateCity()">
+        <!-- Champ du nom de la ville -->
+        <div class="form-group">
+            <label for="cityName">Nom de la ville :</label>
+            <input type="text" id="cityName" class="form-control" [(ngModel)]="city.name" name="name" required />
+        </div>
+
+        <!-- Boutons -->
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
+
+        <!-- Message d'erreur -->
+        <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
+    </form>
+</div>
