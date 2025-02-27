@@ -2,6 +2,7 @@ package fr.fms.business;
 
 import fr.fms.entities.City;
 import fr.fms.entities.Hotel;
+import fr.fms.entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface IBusiness {
     Optional<City> getCityById(Long id); // Récupérer une ville par son ID
     City updateCity(City city); // Mettre à jour une ville
     List<Hotel> getHotelsByCityId(Long cityId); // Récupérer les hôtels d'une ville par ID
+    List<User> getUsers();// Récupérer la liste de tous les utilisateurs
+    Hotel addHotel(Hotel hotel);  // Ajouter un hôtel
 }

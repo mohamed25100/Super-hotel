@@ -1,5 +1,6 @@
 package fr.fms.web;
 
+import fr.fms.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import fr.fms.business.IBusiness;
@@ -119,7 +120,44 @@ public class HotelController {
         }
     }
 
+    // Méthode pour récupérer tous les utilisateurs via la couche métier
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return iBusiness.getUsers();  // Appel de la méthode dans IBusinessImpl
+    }
 
+    // 🔹 Ajouter un nouvel hôtel
+    @PostMapping("/hotel")
+    public ResponseEntity<Hotel> addHotel(@RequestBody Hotel hotel) {
+        if (hotel == null || hotel.getName() == null || hotel.getName().isEmpty()) {
+            log.error("Erreur : l'hôtel n'a pas de nom ou la requête est mal formée");
+            return ResponseEntity.badRequest().build(); // Retourne un code 400 si l'hôtel est invalide
+        }
 
+        try {
+            log.info("Ajout de l'hôtel : {}", hotel.getName());
+
+            // Si l'hôtel n'a pas de manager, on ne l'associe pas
+            if (hotel.getManager() == null) {
+                log.info("Aucun manager associé à cet hôtel.");
+            }
+
+            // Enregistrer l'hôtel sans manager
+            Hotel hotel1 = new Hotel();
+            hotel1.setName(hotel.getName());
+            hotel1.setAddress(hotel.getAddress());
+            hotel1.setPhone(hotel.getPhone());
+            hotel1.setStars(hotel.getStars());
+            hotel1.setPricePerNight(hotel.getPricePerNight());
+            hotel1.setCity(hotel.getCity());
+
+            Hotel savedHotel = iBusiness.addHotel(hotel1);  // Appel à la méthode du service pour ajouter l'hôtel
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedHotel); // Retourne un code 201 avec l'hôtel sauvegardé
+        } catch (Exception e) {
+            log.error("Erreur lors de l'ajout de l'hôtel : {}", hotel.getName(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Retourne un code 500 en cas d'erreur serveur
+        }
+    }
 
 }

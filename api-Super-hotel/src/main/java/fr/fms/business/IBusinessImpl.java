@@ -2,8 +2,10 @@ package fr.fms.business;
 
 import fr.fms.dao.CityRepository;
 import fr.fms.dao.HotelRepository;
+import fr.fms.dao.UserRepository;
 import fr.fms.entities.City;
 import fr.fms.entities.Hotel;
+import fr.fms.entities.User;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class IBusinessImpl implements IBusiness {
 
     @Autowired
     private CityRepository cityRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<Hotel> getHotels() {
@@ -112,5 +117,27 @@ public class IBusinessImpl implements IBusiness {
         return hotels;
     }
 
+    @Override
+    public List<User> getUsers() {
+        return userRepository.findAll();  // Récupère tous les utilisateurs depuis la base de données
+    }
 
+    @Override
+    public Hotel addHotel(Hotel hotel) {
+        if (hotel == null || hotel.getName() == null || hotel.getName().isEmpty() || hotel.getCity() == null) {
+            log.error("Tentative d'ajout d'un hôtel avec des informations manquantes");
+            throw new IllegalArgumentException("L'hôtel doit avoir un nom valide et une ville associée");
+        }
+
+        try {
+            // Sauvegarde l'hôtel et retourne l'objet hotel après sa persistance
+            Hotel savedHotel = hotelRepository.save(hotel);
+            hotelRepository.flush(); // Forcer la synchronisation de la session Hibernate
+            log.info("Hôtel ajouté avec succès : {}", savedHotel.getName());
+            return savedHotel;
+        } catch (Exception e) {
+            log.error("Erreur lors de l'ajout de l'hôtel", e);
+            throw new RuntimeException("Erreur lors de l'ajout de l'hôtel", e);
+        }
+    }
 }

@@ -30,4 +30,9 @@ export class CityService {
   addCity(city: City): Observable<City> {
     return this.http.post<City>(`${environment.host}/city`, city);
   }
+
+  // 🔹 Récupérer toutes les villes
+  public getCities(): Observable<City[]> {
+    return this.http.get<City[]>(`${environment.host}/cities`);
+  }
 }

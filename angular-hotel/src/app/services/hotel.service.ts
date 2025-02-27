@@ -56,4 +56,9 @@ export class HotelService {
   public getUserByEmailAndPassword(credentials: ICredential): Observable<User> {
     return this.http.post<User>(`${environment.host}/users/authenticate`, credentials);
   }
+
+  // 🔹 Ajouter un nouvel hôtel
+  public addHotel(hotel: Hotel): Observable<Hotel> {
+    return this.http.post<Hotel>(`${environment.host}/hotel`, hotel);
+  }
 }

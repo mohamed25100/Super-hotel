@@ -52,7 +52,7 @@ public class Hotel implements Serializable {
     private List<Booking> bookings; // Liste des réservations effectuées pour cet hôtel
 
     @ManyToOne
-    @JoinColumn(name = "manager_id", nullable = false)
+    @JoinColumn(name = "manager_id", nullable = true)
     private User manager; // Le responsable (Manager) de l'hôtel
 
     @Column(name = "image_url")
