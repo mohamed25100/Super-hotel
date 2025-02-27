@@ -55,4 +55,26 @@ public class IBusinessImpl implements IBusiness {
             throw new RuntimeException("Ville introuvable");
         }
     }
+
+    // 🔹 Ajouter une ville
+    @Override
+    public City addCity(City city) {
+        if (city == null || city.getName() == null || city.getName().isEmpty()) {
+            log.error("Tentative d'ajout d'une ville avec des informations manquantes");
+            throw new IllegalArgumentException("La ville doit avoir un nom valide");
+        }
+
+        try {
+            // Sauvegarde la ville et retourne l'objet city après sa persistance
+            City savedCity = cityRepository.save(city);
+            cityRepository.flush(); // Forcer la synchronisation de la session Hibernate
+            log.info("Ville ajoutée avec succès : {}", savedCity.getName());
+            return savedCity;
+        } catch (Exception e) {
+            log.error("Erreur lors de l'ajout de la ville", e);
+            throw new RuntimeException("Erreur lors de l'ajout de la ville", e);
+        }
+    }
+
+
 }

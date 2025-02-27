@@ -7,6 +7,8 @@ import fr.fms.entities.City;
 import fr.fms.entities.Hotel;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -65,6 +67,23 @@ public class HotelController {
         } catch (Exception e) {
             log.error("Erreur lors de la suppression de la ville avec l'ID : {}", id, e);
             throw new RuntimeException("Erreur lors de la suppression de la ville", e);
+        }
+    }
+
+    // 🔹 Ajouter une ville
+    @PostMapping("/city")
+    public ResponseEntity<City> addCity(@RequestBody City city) {
+        if (city == null || city.getName() == null || city.getName().isEmpty()) {
+            log.error("Erreur : la ville n'a pas de nom ou la requête est mal formée");
+            return ResponseEntity.badRequest().build(); // Retourne un code 400 si la ville est invalide
+        }
+        try {
+            log.info("Ajout de la ville : {}", city.getName());
+            City savedCity = iBusiness.addCity(city);  // Appel à la méthode du service pour ajouter la ville
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedCity); // Retourne un code 201 avec la ville sauvegardée
+        } catch (Exception e) {
+            log.error("Erreur lors de l'ajout de la ville : {}", city.getName(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // Retourne un code 500 en cas d'erreur serveur
         }
     }
 

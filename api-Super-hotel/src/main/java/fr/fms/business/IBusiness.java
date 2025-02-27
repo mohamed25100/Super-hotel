@@ -14,4 +14,5 @@ public interface IBusiness {
     Optional<Hotel> getHotelById(Long id); // Récupérer un hôtel par son ID
     void deleteHotel(Long id); // Supprimer un hôtel par son ID
     void deleteCity(Long id); // Supprimer une ville par son ID
+    City addCity(City city);  // Ajouter une ville
 }

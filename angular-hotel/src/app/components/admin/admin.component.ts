@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { City } from 'src/app/model/city.model';
 import { Hotel } from 'src/app/model/hotel.model';
+import { CityService } from 'src/app/services/city.service';
 import { HotelService } from 'src/app/services/hotel.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class AdminComponent implements OnInit {
   listCities: City[] = [];
   error = null;
 
-  constructor(private hotelService: HotelService, private router: Router) {}
+  constructor(private hotelService: HotelService,private cityService: CityService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllHotels();
@@ -70,7 +71,7 @@ export class AdminComponent implements OnInit {
   // 🔹 Supprimer une ville
   deleteCity(cityId: number) {
     if (confirm("Voulez-vous vraiment supprimer cette ville ?")) {
-      this.hotelService.deleteCity(cityId).subscribe({
+      this.cityService.deleteCity(cityId).subscribe({
         next: () => {
           this.listCities = this.listCities.filter(c => c.id !== cityId);
           alert("Ville supprimée avec succès !");

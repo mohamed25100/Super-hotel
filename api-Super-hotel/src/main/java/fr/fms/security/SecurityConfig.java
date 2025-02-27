@@ -58,12 +58,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Désactivation CSRF (nécessaire pour une API REST)
                 .cors(Customizer.withDefaults()) // Gestion des CORS
                 .authorizeHttpRequests(ahr -> {
-                    ahr.requestMatchers(HttpMethod.POST, "/api/login").permitAll(); // Authentification ouverte
-                    ahr.requestMatchers(HttpMethod.GET, "/api/**").permitAll(); // GET ouvert
-                    ahr.requestMatchers(HttpMethod.DELETE, "/api/hotel/**").permitAll(); // Autoriser la suppression sans restrictions
-                    /*
-                    ahr.requestMatchers(HttpMethod.DELETE, "/api/hotel/**").hasAuthority("ROLE_ADMIN"); // DELETE réservé aux admins
-                    */
+                    ahr.requestMatchers(HttpMethod.GET, "/**").permitAll();
+                    ahr.requestMatchers(HttpMethod.POST, "/**").permitAll();
+                    ahr.requestMatchers(HttpMethod.PUT, "/**").permitAll();
+                    ahr.requestMatchers(HttpMethod.DELETE, "/**").permitAll();
                     ahr.anyRequest().authenticated(); // Toutes les autres requêtes nécessitent un token valide
                 })
                 .oauth2ResourceServer(ors -> ors.jwt(jwt -> jwt.jwtAuthenticationConverter(authenticationConverter()))) // Gestion des JWT

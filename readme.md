@@ -40,6 +40,8 @@ ng g c components/admin/add-hotel
 
 ng g c components/admin/edit-hotel
 
+ng g s services/city
+
 # Spring
 
 ## Dependencies

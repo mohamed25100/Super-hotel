@@ -42,7 +42,7 @@ public class SuperHotelApplication implements CommandLineRunner {
 		dataHotel();
 	}
 
-	private void dataHotel() {
+	public void dataHotel() {
 		// Création des utilisateurs avec IAccountImpl
 		User user = new User(null, "John", "Doe", "user@example.com", "password123", Role.USER, null);
 		User admin = new User(null, "Admin", "Smith", "admin@example.com", "password123", Role.ADMIN, null);

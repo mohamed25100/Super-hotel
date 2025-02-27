@@ -11,14 +11,13 @@ export class CityService {
 
   constructor(private http: HttpClient) { }
 
+  // 🔹 Supprimer une ville par son ID
+  public deleteCity(cityId: number): Observable<void> {
+    return this.http.delete<void>(`${environment.host}/city/${cityId}`);
+  }
+
   // Ajouter une ville
   addCity(city: City): Observable<City> {
-    const token = localStorage.getItem('token'); // Récupération du token JWT
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.post<City>(`${environment.host}/city`, city, { headers });
+    return this.http.post<City>(`${environment.host}/city`, city);
   }
 }
