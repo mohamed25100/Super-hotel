@@ -79,7 +79,8 @@ public class HotelController {
         }
         try {
             log.info("Ajout de la ville : {}", city.getName());
-            City savedCity = iBusiness.addCity(city);  // Appel à la méthode du service pour ajouter la ville
+            City city1 = new City(null, city.getName(), null);
+            City savedCity = iBusiness.addCity(city1);  // Appel à la méthode du service pour ajouter la ville
             return ResponseEntity.status(HttpStatus.CREATED).body(savedCity); // Retourne un code 201 avec la ville sauvegardée
         } catch (Exception e) {
             log.error("Erreur lors de l'ajout de la ville : {}", city.getName(), e);

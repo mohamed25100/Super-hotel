@@ -1,6 +1,7 @@
 package fr.fms;
 
 import fr.fms.business.IAccountImpl;
+import fr.fms.business.IBusinessImpl;
 import fr.fms.dao.CityRepository;
 import fr.fms.dao.HotelRepository;
 import fr.fms.dao.RoomRepository;
@@ -37,6 +38,9 @@ public class SuperHotelApplication implements CommandLineRunner {
 	@Autowired
 	private IAccountImpl accountService; // Utilisation de IAccountImpl
 
+	@Autowired
+	private IBusinessImpl businessService; // Injection de IBusinessImpl
+
 	@Override
 	public void run(String... args) throws Exception {
 		dataHotel();
@@ -71,12 +75,26 @@ public class SuperHotelApplication implements CommandLineRunner {
 		userRepository.save(manager2);
 		*/
 		// Créer des villes
+		/*
 		City city1 = new City();
 		city1.setName("Paris");
 		City city2 = new City();
 		city2.setName("Lyon");
+		City city3 = new City(null,"Marseille",null);
 		cityRepository.save(city1);
 		cityRepository.save(city2);
+		cityRepository.save(city3);
+
+		 */
+
+		// Ajouter des villes avec businessService
+		City city1 = new City(null, "Paris", null);
+		City city2 = new City(null, "Lyon", null);
+		City city3 = new City(null, "Marseille", null);
+
+		businessService.addCity(city1);
+		businessService.addCity(city2);
+		businessService.addCity(city3);
 
 		// Créer des hôtels sans spécifier l'ID (car il sera généré par la base de données)
 		Hotel hotel1 = new Hotel();
