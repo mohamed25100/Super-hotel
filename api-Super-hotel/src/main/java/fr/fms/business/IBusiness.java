@@ -17,5 +17,5 @@ public interface IBusiness {
     City addCity(City city);  // Ajouter une ville
     Optional<City> getCityById(Long id); // Récupérer une ville par son ID
     City updateCity(City city); // Mettre à jour une ville
-
+    List<Hotel> getHotelsByCityId(Long cityId); // Récupérer les hôtels d'une ville par ID
 }

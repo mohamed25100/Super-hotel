@@ -53,7 +53,8 @@ export class AdminComponent implements OnInit {
           this.listHotels = this.listHotels.filter(h => h.id !== hotelId);
           alert("Hôtel supprimé avec succès !");
         },
-        error: (err) => alert("Erreur lors de la suppression : " + err.message),
+        //error: (err) => alert("Erreur lors de la suppression : " + err.message),
+        error: (err) => alert("Impossible de supprimer cette l'hôtel car il contient des chambres."),
       });
     }
   }
@@ -76,7 +77,8 @@ export class AdminComponent implements OnInit {
           this.listCities = this.listCities.filter(c => c.id !== cityId);
           alert("Ville supprimée avec succès !");
         },
-        error: (err) => alert("Erreur lors de la suppression : " + err.message),
+        //error: (err) => alert("Erreur lors de la suppression : " + err.message),
+        error: (err) => alert("Impossible de supprimer cette ville car elle contient des hôtels."),
       });
     }
   }

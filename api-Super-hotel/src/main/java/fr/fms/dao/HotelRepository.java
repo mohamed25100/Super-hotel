@@ -17,4 +17,6 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     boolean existsById(Long id); // Vérifie si un hôtel existe par son ID
 
     void deleteById(Long id); // Supprime un hôtel par son ID
+
+    List<Hotel> findByCityId(Long cityId); // Recherche des hôtels par l'ID de la ville
 }

@@ -123,6 +123,8 @@ public class SuperHotelApplication implements CommandLineRunner {
 		hotel2.setImageUrl("https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg");
 		hotelRepository.save(hotel2);
 
+		//businessService.deleteCity(1L);
+
 		// Créer des chambres pour chaque hôtel
 
 		/*

@@ -99,5 +99,18 @@ public class IBusinessImpl implements IBusiness {
         }
     }
 
+    // 🔹 Récupérer tous les hôtels associés à une ville par son ID
+    @Override
+    public List<Hotel> getHotelsByCityId(Long cityId) {
+        // Recherche des hôtels par l'ID de la ville
+        List<Hotel> hotels = hotelRepository.findByCityId(cityId);
+        if (hotels.isEmpty()) {
+            log.warn("Aucun hôtel trouvé pour la ville avec l'ID : {}", cityId);
+        } else {
+            log.info("Hôtels trouvés pour la ville avec l'ID : {}", cityId);
+        }
+        return hotels;
+    }
+
 
 }
