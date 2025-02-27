@@ -18,7 +18,7 @@ class IAccountImplTest {
     private CityRepository cityRepository;
 
     @InjectMocks
-    private IBusinessImpl accountService;
+    private IBusinessImpl bussiness;
 
     @BeforeEach
     void setUp() {
@@ -32,7 +32,7 @@ class IAccountImplTest {
 
         when(cityRepository.save(city)).thenReturn(city);
 
-        City savedCity = accountService.addCity(city);
+        City savedCity = bussiness.addCity(city);
 
         assertNotNull(savedCity);
         assertEquals("Paris", savedCity.getName());
@@ -45,7 +45,7 @@ class IAccountImplTest {
 
         when(cityRepository.save(city)).thenReturn(city);
 
-        assertThrows(IllegalArgumentException.class, () -> accountService.addCity(city));
+        assertThrows(IllegalArgumentException.class, () -> bussiness.addCity(city));
         verify(cityRepository, never()).save(city);
     }
 }
