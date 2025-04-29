@@ -1,8 +1,8 @@
-<header>
+<header *ngIf="hotel">
     <h1>{{ hotel?.name }}</h1>
 </header>
 
-<main>
+<main *ngIf="hotel">
     <section class="hotel-details">
         <div class="hotel-card">
             <img *ngIf="hotel?.imageUrl" [src]="hotel.imageUrl" alt="{{ hotel.name }}">

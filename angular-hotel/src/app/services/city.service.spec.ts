@@ -1,12 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 
 import { CityService } from './city.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('CityService', () => {
   let service: CityService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        HttpClientModule
+      ],
+    });
     service = TestBed.inject(CityService);
   });
 

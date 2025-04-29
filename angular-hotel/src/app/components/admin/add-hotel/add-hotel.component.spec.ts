@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddHotelComponent } from './add-hotel.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 describe('AddHotelComponent', () => {
   let component: AddHotelComponent;
@@ -8,6 +11,11 @@ describe('AddHotelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        HttpClientModule,
+        FormsModule
+      ],
       declarations: [ AddHotelComponent ]
     })
     .compileComponents();

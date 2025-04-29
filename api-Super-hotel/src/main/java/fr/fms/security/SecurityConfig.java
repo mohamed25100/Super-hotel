@@ -103,4 +103,14 @@ public class SecurityConfig {
         return new NimbusJwtEncoder(new ImmutableSecret<>(secretKey.getBytes()));
     }
 
+    // Nouvelle méthode pour authentifier l'utilisateur et loguer ses rôles
+    private Authentication authenticateAndLog(Authentication authentication) {
+        // Authentifie l'utilisateur
+        Authentication authenticated = authenticationManager(userDetailsService).authenticate(authentication);
+
+        // Logge les rôles de l'utilisateur
+        log.info("User roles from JWT: {}", authenticated.getAuthorities());
+
+        return authenticated;
+    }
 }
