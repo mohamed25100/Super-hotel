@@ -42,6 +42,9 @@ ng g c components/admin/edit-hotel
 
 ng g s services/city
 
+ng generate config karma
+
+
 # Spring
 
 ## Dependencies
