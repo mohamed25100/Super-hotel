@@ -1,5 +1,5 @@
 <header *ngIf="hotel">
-    <h1>{{ hotel?.name }}</h1>
+    <h1>{{ hotel.name }}</h1>
 </header>
 
 <main *ngIf="hotel">
@@ -8,7 +8,7 @@
             <img *ngIf="hotel?.imageUrl" [src]="hotel.imageUrl" alt="{{ hotel.name }}">
             <img *ngIf="!hotel?.imageUrl" src="http://localhost:8080/images/none.png" alt="{{ hotel.name }}">
             
-            <h2>{{ hotel?.name }}</h2>
+            <h2>{{ hotel.name }}</h2>
             <p><strong>Adresse :</strong> {{ hotel.address }}</p>
             <p><strong>Téléphone :</strong> {{ hotel.phone }}</p>
             <p><strong>Étoiles :</strong> {{ hotel.stars }} ⭐</p>
